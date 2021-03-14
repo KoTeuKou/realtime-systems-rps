@@ -6,13 +6,9 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import java.text.SimpleDateFormat;
-
 @Component
 public class MainHandler {
 
-
-    private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
     private ProcessingService processingService;
 

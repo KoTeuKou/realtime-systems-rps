@@ -29,9 +29,11 @@ public class ProcessingService {
     public Mono<ServerResponse> computeDispersion(String since) {
         webClient = buildWebClient();
         return webClient.get()
-                .uri(uriBuilder -> uriBuilder.path("history")
+                .uri(uriBuilder -> uriBuilder
+                        .path("history")
                         .queryParam("start_at", since)
                         .queryParam("end_at", dateFormatter.format(Date.from(Instant.now())))
+                        .queryParam("symbols", "USD")
                         .build())
                 .retrieve()
                 .bodyToMono(RatesForPeriod.class)
@@ -52,7 +54,9 @@ public class ProcessingService {
     public Mono<ServerResponse> getRate(String date) {
         webClient = buildWebClient();
         return webClient.get()
-                .uri(uriBuilder -> uriBuilder.path(date)
+                .uri(uriBuilder -> uriBuilder
+                        .path(date)
+                        .queryParam("symbols", "USD")
                         .build())
                 .retrieve()
                 .bodyToMono(RatesForDate.class)
